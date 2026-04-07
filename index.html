@@ -26,7 +26,7 @@
       --font-body: 'Inter', -apple-system, sans-serif;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
 
     body {
       font-family: var(--font-body);
@@ -45,6 +45,7 @@
     .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
       background: rgba(26, 18, 11, 0.92);
+      -webkit-backdrop-filter: blur(12px);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(212, 146, 11, 0.2);
       transition: box-shadow 0.3s;
@@ -85,7 +86,7 @@
     }
 
     /* ── Sections ── */
-    section { padding: 5rem 1.5rem; }
+    section { padding: 5rem 1.5rem; scroll-margin-top: 4.5rem; }
     .container { max-width: 1100px; margin: 0 auto; }
     .section-title {
       font-family: var(--font-display); font-size: 2.4rem;
@@ -100,7 +101,8 @@
 
     /* ── Hero ── */
     .hero {
-      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      min-height: 100vh; min-height: 100svh;
+      display: flex; align-items: center; justify-content: center;
       text-align: center; padding-top: 4rem;
       background:
         radial-gradient(ellipse at 20% 80%, rgba(212,146,11,0.08) 0%, transparent 50%),
@@ -258,16 +260,17 @@
     /* ── Beer Wishlist ── */
     #wishlist { background: var(--brown-mid); }
     .wishlist-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
       gap: 1rem;
     }
     .wish-item {
       display: flex; align-items: center; gap: 0.75rem;
-      background: var(--brown-card);
+      background: var(--brown-card); color: var(--cream);
       border: 1px solid rgba(212,146,11,0.1);
       border-radius: 10px; padding: 0.9rem 1.2rem;
       cursor: pointer; transition: all 0.25s;
-      user-select: none;
+      user-select: none; font-family: var(--font-body);
+      font-size: inherit; text-align: left; width: 100%;
     }
     .wish-item:hover {
       border-color: rgba(212,146,11,0.3);
@@ -301,7 +304,7 @@
     /* ── Oktoberfest Tents ── */
     #tents { background: var(--brown-dark); }
     .tent-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
       gap: 1.5rem;
     }
     .tent-card {
@@ -403,23 +406,12 @@
     }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-    /* Beer foam divider */
-    .divider {
-      height: 40px; position: relative;
-      overflow: hidden; margin: 0 -1.5rem;
-    }
-    .divider::before {
-      content: '';
-      position: absolute; bottom: 0; left: -5%; right: -5%;
-      height: 60px;
-      background:
-        radial-gradient(ellipse 80px 40px at 10% 100%, var(--brown-mid) 48%, transparent 50%),
-        radial-gradient(ellipse 90px 45px at 25% 100%, var(--brown-mid) 48%, transparent 50%),
-        radial-gradient(ellipse 70px 38px at 40% 100%, var(--brown-mid) 48%, transparent 50%),
-        radial-gradient(ellipse 85px 42px at 55% 100%, var(--brown-mid) 48%, transparent 50%),
-        radial-gradient(ellipse 75px 40px at 70% 100%, var(--brown-mid) 48%, transparent 50%),
-        radial-gradient(ellipse 80px 43px at 85% 100%, var(--brown-mid) 48%, transparent 50%),
-        radial-gradient(ellipse 90px 40px at 100% 100%, var(--brown-mid) 48%, transparent 50%);
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
     }
   </style>
 </head>
@@ -429,7 +421,7 @@
   <nav class="nav" id="nav">
     <div class="nav-inner">
       <a href="#hero" class="nav-logo">🍺 GBP 2026</a>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">☰</button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-controls="navLinks" aria-expanded="false">☰</button>
       <ul class="nav-links" id="navLinks">
         <li><a href="#route">Route</a></li>
         <li><a href="#itinerary">Itinerary</a></li>
@@ -440,6 +432,7 @@
     </div>
   </nav>
 
+  <main>
   <!-- ═══ HERO ═══ -->
   <section class="hero" id="hero">
     <div class="hero-content">
@@ -447,7 +440,7 @@
       <h1 class="hero-title">The Grand Beer<br>Pilgrimage 2026</h1>
       <p class="hero-route">AMSTERDAM → BRUGES → BRUSSELS → COLOGNE → MUNICH</p>
       <p class="hero-dates">September 7 – 21, 2026 · 14 Days · 5 Legends</p>
-      <div class="countdown" id="countdown">
+      <div class="countdown" id="countdown" role="timer" aria-label="Countdown to trip">
         <div class="countdown-item">
           <div class="countdown-num" id="cd-days">---</div>
           <div class="countdown-label">Days</div>
@@ -694,6 +687,8 @@
     </div>
   </section>
 
+  </main>
+
   <!-- ═══ FOOTER ═══ -->
   <footer class="footer">
     <div class="footer-motto">"Life's too short for bad beer."</div>
@@ -704,28 +699,30 @@
   <script>
     /* ── Countdown Timer ── */
     (function countdown() {
-      const target = new Date('2026-09-07T00:00:00').getTime();
+      var target = new Date(2026, 8, 7, 0, 0, 0).getTime();
+      var timerId;
       function update() {
-        const now = Date.now();
-        const diff = target - now;
+        var now = Date.now();
+        var diff = target - now;
         if (diff <= 0) {
           document.getElementById('cd-days').textContent = '🍻';
           document.getElementById('cd-hours').textContent = 'IT';
           document.getElementById('cd-mins').textContent = 'IS';
           document.getElementById('cd-secs').textContent = 'TIME';
+          clearInterval(timerId);
           return;
         }
-        const d = Math.floor(diff / 86400000);
-        const h = Math.floor((diff % 86400000) / 3600000);
-        const m = Math.floor((diff % 3600000) / 60000);
-        const s = Math.floor((diff % 60000) / 1000);
+        var d = Math.floor(diff / 86400000);
+        var h = Math.floor((diff % 86400000) / 3600000);
+        var m = Math.floor((diff % 3600000) / 60000);
+        var s = Math.floor((diff % 60000) / 1000);
         document.getElementById('cd-days').textContent = d;
         document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
         document.getElementById('cd-mins').textContent = String(m).padStart(2, '0');
         document.getElementById('cd-secs').textContent = String(s).padStart(2, '0');
       }
       update();
-      setInterval(update, 1000);
+      timerId = setInterval(update, 1000);
     })();
 
     /* ── Nav scroll effect + mobile toggle ── */
@@ -736,10 +733,11 @@
 
       window.addEventListener('scroll', function() {
         navEl.classList.toggle('scrolled', window.scrollY > 50);
-      });
+      }, { passive: true });
 
       toggle.addEventListener('click', function() {
-        links.classList.toggle('open');
+        var isOpen = links.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(isOpen));
       });
 
       // Close mobile nav on link click
@@ -799,8 +797,10 @@
         grid.innerHTML = '';
         beers.forEach(function(beer, i) {
           var checked = !!saved[i];
-          var el = document.createElement('div');
+          var el = document.createElement('button');
+          el.type = 'button';
           el.className = 'wish-item' + (checked ? ' checked' : '');
+          el.setAttribute('aria-pressed', String(checked));
           el.innerHTML =
             '<div class="wish-check">' + (checked ? '✓' : '') + '</div>' +
             '<div class="wish-name">' + beer.name + '</div>' +
@@ -813,8 +813,7 @@
           grid.appendChild(el);
         });
 
-        var count = 0;
-        for (var k in saved) { if (saved[k]) count++; }
+        var count = beers.reduce(function(n, _, i) { return n + (saved[i] ? 1 : 0); }, 0);
         counter.textContent = count + ' / ' + beers.length + ' tasted';
       }
       render();
