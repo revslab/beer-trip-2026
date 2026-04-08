@@ -193,6 +193,7 @@
       font-size: 0.95rem; color: var(--cream);
     }
     .route-date { font-size: 0.75rem; color: var(--cream-dim); }
+    .route-detail { font-size: 0.7rem; color: var(--amber-light); font-style: italic; }
     .route-arrow {
       font-size: 1.5rem; color: var(--amber-dark);
       padding: 0 0.25rem; margin-top: -1.5rem;
@@ -255,6 +256,116 @@
       .itin-card { grid-template-columns: 1fr; }
       .itin-side { padding: 1.5rem; flex-direction: row; gap: 1rem; }
       .itin-flag { font-size: 2rem; margin-bottom: 0; }
+    }
+
+    /* ── Trappist Priority List ── */
+    .trappist-section {
+      margin-top: 1.25rem; padding-top: 1rem;
+      border-top: 1px solid rgba(212,146,11,0.15);
+    }
+    .trappist-title {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 0.95rem; color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+    .trappist-list { list-style: none; }
+    .trappist-list li {
+      padding: 0.35rem 0; font-size: 0.88rem;
+      border-bottom: 1px solid rgba(212,146,11,0.06);
+      color: var(--cream);
+    }
+    .trappist-list li:last-child { border-bottom: none; }
+    .trappist-rank { margin-right: 0.4rem; }
+    .trappist-name { font-weight: 600; color: var(--amber-light); }
+    .trappist-note { font-size: 0.78rem; color: var(--cream-dim); font-style: italic; }
+
+    /* ── Route Decision Callout ── */
+    .route-decision {
+      background: linear-gradient(135deg, rgba(255,215,0,0.08), rgba(212,146,11,0.12));
+      border: 2px solid rgba(255,215,0,0.3);
+      border-radius: 16px; padding: 2rem 2.5rem;
+      margin: 0.5rem 0;
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .route-decision.visible { opacity: 1; transform: translateY(0); }
+    .route-decision-header {
+      font-family: var(--font-display); font-size: 1.5rem;
+      font-weight: 900; color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+    .route-decision-sub {
+      font-size: 0.9rem; color: var(--cream-dim);
+      margin-bottom: 1.5rem;
+    }
+    .route-option {
+      background: rgba(26, 18, 11, 0.5);
+      border: 1px solid rgba(212,146,11,0.15);
+      border-radius: 12px; padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .route-option.recommended {
+      border-color: rgba(107, 189, 91, 0.4);
+      background: rgba(107, 189, 91, 0.06);
+    }
+    .route-option-label {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 1.05rem; color: var(--amber-light);
+      margin-bottom: 0.3rem;
+    }
+    .route-option.recommended .route-option-label { color: var(--green-check); }
+    .rec-badge {
+      display: inline-block; font-family: var(--font-body);
+      font-size: 0.65rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      background: rgba(107, 189, 91, 0.2); color: var(--green-check);
+      border: 1px solid rgba(107, 189, 91, 0.3);
+      padding: 0.15rem 0.5rem; border-radius: 50px;
+      margin-left: 0.5rem; vertical-align: middle;
+    }
+    .route-option-desc {
+      font-size: 0.88rem; color: var(--cream-dim); line-height: 1.5;
+    }
+    .route-option-desc strong { color: var(--cream); font-weight: 600; }
+    .route-decision-why {
+      margin-top: 1rem; padding: 1rem 1.25rem;
+      background: rgba(212,146,11,0.06);
+      border-left: 3px solid var(--amber);
+      border-radius: 0 8px 8px 0;
+      font-size: 0.85rem; color: var(--cream-dim); line-height: 1.6;
+    }
+    .route-decision-why strong { color: var(--amber-light); }
+    .route-decision-note {
+      margin-top: 0.75rem; font-size: 0.82rem;
+      color: var(--cream-dim); font-style: italic;
+    }
+
+    @media (max-width: 700px) {
+      .route-decision { padding: 1.5rem; }
+    }
+
+    /* ── Steve's Timeline Info Card ── */
+    .info-card {
+      background: var(--brown-card);
+      border: 1px solid rgba(212,146,11,0.2);
+      border-radius: 12px; padding: 1.5rem 2rem;
+      max-width: 480px; margin: 2.5rem auto 0;
+      text-align: left;
+    }
+    .info-card-header {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 1.05rem; color: var(--amber-light);
+      margin-bottom: 0.75rem;
+    }
+    .info-card-list { list-style: none; }
+    .info-card-list li {
+      padding: 0.3rem 0; font-size: 0.88rem;
+      color: var(--cream); border-bottom: 1px solid rgba(212,146,11,0.06);
+    }
+    .info-card-list li:last-child { border-bottom: none; }
+    .info-card-note {
+      margin-top: 0.6rem; font-size: 0.8rem;
+      color: var(--cream-dim); font-style: italic;
     }
 
     /* ── Beer Wishlist ── */
@@ -438,7 +549,7 @@
     <div class="hero-content">
       <span class="hero-emoji">🍻</span>
       <h1 class="hero-title">The Grand Beer<br>Pilgrimage 2026</h1>
-      <p class="hero-route">AMSTERDAM → BRUGES → BRUSSELS → COLOGNE → MUNICH</p>
+      <p class="hero-route">AMS → BRUGES → [COLOGNE <em>or</em> BAMBERG] → MUNICH</p>
       <p class="hero-dates">September 7 – 21, 2026 · 14 Days · 5 Legends</p>
       <div class="countdown" id="countdown" role="timer" aria-label="Countdown to trip">
         <div class="countdown-item">
@@ -466,7 +577,7 @@
   <section id="route">
     <div class="container">
       <h2 class="section-title">The Route</h2>
-      <p class="section-subtitle">5 cities · 4 countries · 1 legendary journey</p>
+      <p class="section-subtitle">4 countries · day trips from Bruges · a route decision to make</p>
       <div class="route-track">
         <div class="route-stop">
           <div class="route-dot">🇳🇱</div>
@@ -478,18 +589,14 @@
           <div class="route-dot">🇧🇪</div>
           <div class="route-city">Bruges</div>
           <div class="route-date">Sep 10–12</div>
-        </div>
-        <div class="route-arrow">→</div>
-        <div class="route-stop">
-          <div class="route-dot">🇧🇪</div>
-          <div class="route-city">Brussels</div>
-          <div class="route-date">Sep 13–14</div>
+          <div class="route-detail">+ Brussels &amp; Ghent day trips</div>
         </div>
         <div class="route-arrow">→</div>
         <div class="route-stop">
           <div class="route-dot">🇩🇪</div>
-          <div class="route-city">Cologne</div>
-          <div class="route-date">Sep 15–16</div>
+          <div class="route-city">Cologne / Bamberg</div>
+          <div class="route-date">Sep 13–16</div>
+          <div class="route-detail">See route decision below</div>
         </div>
         <div class="route-arrow">→</div>
         <div class="route-stop">
@@ -528,62 +635,113 @@
           </div>
         </div>
 
-        <!-- Bruges -->
+        <!-- Bruges (3 nights, Belgium base) -->
         <div class="itin-card">
           <div class="itin-side">
             <div class="itin-flag">🇧🇪🍷</div>
             <div>
               <div class="itin-city">Bruges</div>
-              <div class="itin-nights">2 nights</div>
+              <div class="itin-nights">3 nights · Belgium base</div>
             </div>
           </div>
           <div class="itin-body">
-            <div class="itin-dates">Sep 10 – 12, 2026</div>
+            <div class="itin-dates">Sep 10 – 12, 2026 (depart morning Sep 13)</div>
             <ul class="itin-stops">
               <li><span class="emoji">⛪</span> <span class="itin-highlight">Westvleteren day trip</span> — legendary Trappist abbey</li>
               <li class="itin-note">Possibly the best beer in the world</li>
               <li><span class="emoji">📚</span> <span class="itin-highlight">'t Bruges Beertje</span> — 500+ beers on menu</li>
               <li><span class="emoji">🏰</span> <span class="itin-highlight">De Garre</span> — hidden alley, house Tripel</li>
+              <li><span class="emoji">🚂</span> <span class="itin-highlight">Day trip: Brussels</span> (~1.5hr train each way)</li>
+              <li class="itin-note">Cantillon Brewery (sacred lambic &amp; gueuze), Delirium Caf&eacute; (2,000+ beers), Grand-Place at night</li>
+              <li><span class="emoji">🚂</span> <span class="itin-highlight">Day trip: Ghent</span> (~30min train)</li>
+              <li class="itin-note">Medieval charm, great beer cafes, easy half-day trip</li>
             </ul>
-          </div>
-        </div>
 
-        <!-- Brussels -->
-        <div class="itin-card">
-          <div class="itin-side">
-            <div class="itin-flag">🇧🇪🍻</div>
-            <div>
-              <div class="itin-city">Brussels</div>
-              <div class="itin-nights">2 nights</div>
+            <!-- Trappist Ale Priority -->
+            <div class="trappist-section">
+              <div class="trappist-title">🏆 Trappist Ale Priority List</div>
+              <ul class="trappist-list">
+                <li><span class="trappist-rank">🥇</span> <span class="trappist-name">Westvleteren 12</span> — <span class="trappist-note">abbey day trip (non-negotiable)</span></li>
+                <li><span class="trappist-rank">🥈</span> <span class="trappist-name">Westmalle Tripel</span> — <span class="trappist-note">~45min from Antwerp, possible detour</span></li>
+                <li><span class="trappist-rank">🥉</span> <span class="trappist-name">Rochefort 10</span> — <span class="trappist-note">available on draft in Bruges/Brussels</span></li>
+                <li><span class="trappist-rank">&nbsp;&nbsp;&nbsp;</span> <span class="trappist-name">Chimay / Orval</span> — <span class="trappist-note">widely available, grab anywhere</span></li>
+              </ul>
             </div>
           </div>
-          <div class="itin-body">
-            <div class="itin-dates">Sep 13 – 14, 2026</div>
-            <ul class="itin-stops">
-              <li><span class="emoji">🏛️</span> <span class="itin-highlight">Cantillon Brewery</span> — sacred lambic & gueuze</li>
-              <li class="itin-note">A living museum of spontaneous fermentation</li>
-              <li><span class="emoji">🤯</span> <span class="itin-highlight">Delirium Café</span> — 2,000+ beers</li>
-              <li><span class="emoji">✨</span> Grand-Place at night</li>
-              <li><span class="emoji">🍟</span> Moules-frites (mussels & fries)</li>
-            </ul>
+        </div>
+
+        <!-- ═══ ROUTE DECISION CALLOUT ═══ -->
+        <div class="route-decision" id="route-decision">
+          <div class="route-decision-header">🗺️ Route Decision: Cologne or Bamberg?</div>
+          <div class="route-decision-sub">We need to decide how we get from Bruges to Munich</div>
+
+          <div class="route-option">
+            <div class="route-option-label">Option A: Cologne → Bamberg → Munich</div>
+            <div class="route-option-desc">
+              <strong>Cologne 2 nights</strong> — K&ouml;lsch brauh&auml;user, cathedral, Altstadt crawl.<br>
+              Day trip or stopover in <strong>Bamberg</strong> en route to Munich (~3hr Cologne → Bamberg).<br>
+              <strong>D&uuml;sseldorf</strong> add-on: Altbier city, only 30min from Cologne — could combine.
+            </div>
+          </div>
+
+          <div class="route-option recommended">
+            <div class="route-option-label">Option B: Skip Cologne → Bamberg 1 night → Munich <span class="rec-badge">Recommended</span></div>
+            <div class="route-option-desc">
+              <strong>Bamberg 1 night</strong> (or 2) — then <strong>1hr train to Munich</strong>.<br>
+              Maximizes time in the most beer-dense city on the planet per capita.<br>
+              Still get K&ouml;lsch at any Belgian/German craft bar. Bamberg is irreplaceable.
+            </div>
+          </div>
+
+          <div class="route-decision-why">
+            <strong>Why Bamberg?</strong> A medieval UNESCO city of 70k people with <strong>9+ breweries</strong>.
+            Home of <strong>Rauchbier</strong> (smoked beer) — a style you can barely find anywhere else on earth.
+            <strong>Schlenkerla</strong> tavern has been pouring smoked beer for <strong>600 years</strong> — a genuine bucket-list beer experience.
+            Serious beer nerds go out of their way for Bamberg. We're already in the neighbourhood.
+          </div>
+
+          <div class="route-decision-note">
+            💡 D&uuml;sseldorf note: If we do Cologne, D&uuml;sseldorf is 30min away — the Altbier capital. Could be a half-day side trip.
           </div>
         </div>
 
-        <!-- Cologne -->
+        <!-- Cologne (conditional on route decision) -->
         <div class="itin-card">
           <div class="itin-side">
             <div class="itin-flag">🇩🇪🥂</div>
             <div>
               <div class="itin-city">Cologne</div>
-              <div class="itin-nights">2 nights</div>
+              <div class="itin-nights">Option A · 2 nights</div>
             </div>
           </div>
           <div class="itin-body">
-            <div class="itin-dates">Sep 15 – 16, 2026</div>
+            <div class="itin-dates">Sep 13 – 14, 2026 (if Option A)</div>
             <ul class="itin-stops">
               <li><span class="emoji">🍺</span> <span class="itin-highlight">Kölsch territory</span> — beer with its own glass (Stange)</li>
               <li><span class="emoji">🏠</span> Brauhaus hopping: Früh, Gaffel, Peters, Dom</li>
               <li><span class="emoji">⛪</span> Cologne Cathedral</li>
+              <li><span class="emoji">🚂</span> <span class="itin-highlight">Düsseldorf day trip</span> — Altbier capital, 30min away</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bamberg -->
+        <div class="itin-card">
+          <div class="itin-side" style="background: linear-gradient(135deg, rgba(255,215,0,0.12), rgba(212,146,11,0.08));">
+            <div class="itin-flag">🇩🇪🔥</div>
+            <div>
+              <div class="itin-city">Bamberg</div>
+              <div class="itin-nights">Option B · 1–2 nights</div>
+            </div>
+          </div>
+          <div class="itin-body">
+            <div class="itin-dates">Sep 13 – 14, 2026 (if Option B)</div>
+            <ul class="itin-stops">
+              <li><span class="emoji">🔥</span> <span class="itin-highlight">Schlenkerla</span> — 600-year-old Rauchbier tavern</li>
+              <li class="itin-note">THE bucket-list smoked beer experience</li>
+              <li><span class="emoji">🍺</span> <span class="itin-highlight">9+ breweries</span> in a city of 70,000</li>
+              <li><span class="emoji">🏛️</span> UNESCO medieval old town</li>
+              <li><span class="emoji">🚂</span> 1hr train to Munich — easy connection</li>
             </ul>
           </div>
         </div>
@@ -684,6 +842,18 @@
           <div class="crew-name">Steve</div>
         </div>
       </div>
+
+      <!-- Steve's Timeline -->
+      <div class="info-card">
+        <div class="info-card-header">✈️ Steve's Timeline</div>
+        <ul class="info-card-list">
+          <li>🎪 <strong>Sep 19:</strong> Oktoberfest opening day — Steve is there ✅</li>
+          <li>✈️ <strong>Sep 20 morning:</strong> Flies Munich → LAX (~11hr flight)</li>
+          <li>🕐 Departs ~10am Munich → lands ~noon LA time (9hr time diff heading west)</li>
+          <li>🎂 <strong>Sep 21:</strong> Home for partner's birthday</li>
+        </ul>
+        <div class="info-card-note">Leaves 1 day early but still gets Oktoberfest opening day. No FOMO.</div>
+      </div>
     </div>
   </section>
 
@@ -750,7 +920,7 @@
 
     /* ── Scroll Animations ── */
     (function scrollAnim() {
-      var targets = document.querySelectorAll('.itin-card, .tent-card, .crew-card, .fade-in');
+      var targets = document.querySelectorAll('.itin-card, .tent-card, .crew-card, .route-decision, .fade-in');
       if (!('IntersectionObserver' in window)) {
         targets.forEach(function(el) { el.classList.add('visible'); });
         return;
@@ -770,6 +940,11 @@
     (function wishlist() {
       var beers = [
         { name: 'Westvleteren XII', city: 'Bruges' },
+        { name: 'Westvleteren Blond', city: 'Bruges' },
+        { name: 'Westmalle Tripel', city: 'Belgium' },
+        { name: 'Rochefort 10', city: 'Belgium' },
+        { name: 'Chimay Blue', city: 'Belgium' },
+        { name: 'Orval', city: 'Belgium' },
         { name: 'Brouwerij \'t IJ IPA', city: 'Amsterdam' },
         { name: 'Heineken (fresh draft)', city: 'Amsterdam' },
         { name: 'Cantillon Gueuze', city: 'Brussels' },
@@ -779,12 +954,14 @@
         { name: 'Bruges Zot Blond', city: 'Bruges' },
         { name: 'Früh Kölsch', city: 'Cologne' },
         { name: 'Gaffel Kölsch', city: 'Cologne' },
+        { name: 'Schlenkerla Rauchbier Märzen', city: 'Bamberg' },
+        { name: 'Schlenkerla Rauchbier Urbock', city: 'Bamberg' },
+        { name: 'Spezial Rauchbier', city: 'Bamberg' },
         { name: 'Augustiner Edelstoff', city: 'Munich' },
         { name: 'Augustiner Oktoberfest Maß', city: 'Munich' },
         { name: 'Hofbräu Oktoberfestbier', city: 'Munich' },
         { name: 'Paulaner Oktoberfest Maß', city: 'Munich' },
         { name: 'Spaten Oktoberfestbier', city: 'Munich' },
-        { name: 'Westvleteren Blond', city: 'Bruges' },
       ];
 
       var saved = {};
