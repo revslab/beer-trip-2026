@@ -279,6 +279,14 @@
     .trappist-name { font-weight: 600; color: var(--amber-light); }
     .trappist-note { font-size: 0.78rem; color: var(--cream-dim); font-style: italic; }
 
+    /* ── Itinerary accent sides ── */
+    .itin-side--gold {
+      background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(212,146,11,0.1));
+    }
+    .itin-side--amber {
+      background: linear-gradient(135deg, rgba(255,215,0,0.12), rgba(212,146,11,0.08));
+    }
+
     /* ── Route Decision Callout ── */
     .route-decision {
       background: linear-gradient(135deg, rgba(255,215,0,0.08), rgba(212,146,11,0.12));
@@ -316,11 +324,11 @@
     .route-option.recommended .route-option-label { color: var(--green-check); }
     .rec-badge {
       display: inline-block; font-family: var(--font-body);
-      font-size: 0.65rem; font-weight: 700;
+      font-size: 0.75rem; font-weight: 700;
       text-transform: uppercase; letter-spacing: 0.1em;
-      background: rgba(107, 189, 91, 0.2); color: var(--green-check);
-      border: 1px solid rgba(107, 189, 91, 0.3);
-      padding: 0.15rem 0.5rem; border-radius: 50px;
+      background: rgba(30, 60, 25, 0.85); color: #8fd47e;
+      border: 1px solid rgba(107, 189, 91, 0.4);
+      padding: 0.2rem 0.6rem; border-radius: 50px;
       margin-left: 0.5rem; vertical-align: middle;
     }
     .route-option-desc {
@@ -577,7 +585,7 @@
   <section id="route">
     <div class="container">
       <h2 class="section-title">The Route</h2>
-      <p class="section-subtitle">4 countries · day trips from Bruges · a route decision to make</p>
+      <p class="section-subtitle">3 countries · day trips from Bruges · a route decision to make</p>
       <div class="route-track">
         <div class="route-stop">
           <div class="route-dot">🇳🇱</div>
@@ -671,12 +679,12 @@
         </div>
 
         <!-- ═══ ROUTE DECISION CALLOUT ═══ -->
-        <div class="route-decision" id="route-decision">
-          <div class="route-decision-header">🗺️ Route Decision: Cologne or Bamberg?</div>
-          <div class="route-decision-sub">We need to decide how we get from Bruges to Munich</div>
+        <section class="route-decision" id="route-decision" aria-labelledby="route-decision-title">
+          <h3 class="route-decision-header" id="route-decision-title">🗺️ Route Decision: Cologne or Bamberg?</h3>
+          <p class="route-decision-sub">We need to decide how we get from Bruges to Munich</p>
 
           <div class="route-option">
-            <div class="route-option-label">Option A: Cologne → Bamberg → Munich</div>
+            <h4 class="route-option-label">Option A: Cologne → Bamberg → Munich</h4>
             <div class="route-option-desc">
               <strong>Cologne 2 nights</strong> — K&ouml;lsch brauh&auml;user, cathedral, Altstadt crawl.<br>
               Day trip or stopover in <strong>Bamberg</strong> en route to Munich (~3hr Cologne → Bamberg).<br>
@@ -685,9 +693,9 @@
           </div>
 
           <div class="route-option recommended">
-            <div class="route-option-label">Option B: Skip Cologne → Bamberg 1 night → Munich <span class="rec-badge">Recommended</span></div>
+            <h4 class="route-option-label">Option B: Skip Cologne → Bamberg 2–3 nights → Munich <span class="rec-badge">Recommended</span></h4>
             <div class="route-option-desc">
-              <strong>Bamberg 1 night</strong> (or 2) — then <strong>1hr train to Munich</strong>.<br>
+              <strong>Bamberg 2–3 nights</strong> — then <strong>1hr train to Munich</strong>.<br>
               Maximizes time in the most beer-dense city on the planet per capita.<br>
               Still get K&ouml;lsch at any Belgian/German craft bar. Bamberg is irreplaceable.
             </div>
@@ -700,10 +708,10 @@
             Serious beer nerds go out of their way for Bamberg. We're already in the neighbourhood.
           </div>
 
-          <div class="route-decision-note">
+          <p class="route-decision-note">
             💡 D&uuml;sseldorf note: If we do Cologne, D&uuml;sseldorf is 30min away — the Altbier capital. Could be a half-day side trip.
-          </div>
-        </div>
+          </p>
+        </section>
 
         <!-- Cologne (conditional on route decision) -->
         <div class="itin-card">
@@ -711,31 +719,32 @@
             <div class="itin-flag">🇩🇪🥂</div>
             <div>
               <div class="itin-city">Cologne</div>
-              <div class="itin-nights">Option A · 2 nights</div>
+              <div class="itin-nights">Option A · 2–3 nights</div>
             </div>
           </div>
           <div class="itin-body">
-            <div class="itin-dates">Sep 13 – 14, 2026 (if Option A)</div>
+            <div class="itin-dates">Sep 13 – 16, 2026 (if Option A)</div>
             <ul class="itin-stops">
               <li><span class="emoji">🍺</span> <span class="itin-highlight">Kölsch territory</span> — beer with its own glass (Stange)</li>
               <li><span class="emoji">🏠</span> Brauhaus hopping: Früh, Gaffel, Peters, Dom</li>
               <li><span class="emoji">⛪</span> Cologne Cathedral</li>
               <li><span class="emoji">🚂</span> <span class="itin-highlight">Düsseldorf day trip</span> — Altbier capital, 30min away</li>
+              <li><span class="emoji">🚂</span> <span class="itin-highlight">Bamberg day trip</span> en route to Munich (~3hr)</li>
             </ul>
           </div>
         </div>
 
         <!-- Bamberg -->
         <div class="itin-card">
-          <div class="itin-side" style="background: linear-gradient(135deg, rgba(255,215,0,0.12), rgba(212,146,11,0.08));">
+          <div class="itin-side itin-side--amber">
             <div class="itin-flag">🇩🇪🔥</div>
             <div>
               <div class="itin-city">Bamberg</div>
-              <div class="itin-nights">Option B · 1–2 nights</div>
+              <div class="itin-nights">Option B · 2–3 nights</div>
             </div>
           </div>
           <div class="itin-body">
-            <div class="itin-dates">Sep 13 – 14, 2026 (if Option B)</div>
+            <div class="itin-dates">Sep 13 – 16, 2026 (if Option B)</div>
             <ul class="itin-stops">
               <li><span class="emoji">🔥</span> <span class="itin-highlight">Schlenkerla</span> — 600-year-old Rauchbier tavern</li>
               <li class="itin-note">THE bucket-list smoked beer experience</li>
@@ -748,7 +757,7 @@
 
         <!-- Munich -->
         <div class="itin-card">
-          <div class="itin-side" style="background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(212,146,11,0.1));">
+          <div class="itin-side itin-side--gold">
             <div class="itin-flag">🇩🇪🎪</div>
             <div>
               <div class="itin-city">Munich</div>
@@ -965,15 +974,18 @@
       ];
 
       var saved = {};
-      try { saved = JSON.parse(localStorage.getItem('gbp-wishlist') || '{}'); } catch(e) {}
+      try { saved = JSON.parse(localStorage.getItem('gbp-wishlist-v2') || '{}'); } catch(e) {}
 
       var grid = document.getElementById('wishlistGrid');
       var counter = document.getElementById('wishCounter');
 
+      function slugify(name) { return name.toLowerCase().replace(/[^a-z0-9]+/g, '-'); }
+
       function render() {
         grid.innerHTML = '';
-        beers.forEach(function(beer, i) {
-          var checked = !!saved[i];
+        beers.forEach(function(beer) {
+          var key = slugify(beer.name);
+          var checked = !!saved[key];
           var el = document.createElement('button');
           el.type = 'button';
           el.className = 'wish-item' + (checked ? ' checked' : '');
@@ -983,14 +995,14 @@
             '<div class="wish-name">' + beer.name + '</div>' +
             '<div class="wish-city">' + beer.city + '</div>';
           el.addEventListener('click', function() {
-            saved[i] = !saved[i];
-            try { localStorage.setItem('gbp-wishlist', JSON.stringify(saved)); } catch(e) {}
+            saved[key] = !saved[key];
+            try { localStorage.setItem('gbp-wishlist-v2', JSON.stringify(saved)); } catch(e) {}
             render();
           });
           grid.appendChild(el);
         });
 
-        var count = beers.reduce(function(n, _, i) { return n + (saved[i] ? 1 : 0); }, 0);
+        var count = beers.reduce(function(n, beer) { return n + (saved[slugify(beer.name)] ? 1 : 0); }, 0);
         counter.textContent = count + ' / ' + beers.length + ' tasted';
       }
       render();
